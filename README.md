@@ -77,7 +77,7 @@ SECTIONS
 
 ## 実験 (reset handler)
 
-
+[reset_handler](https://github.com/SaitoYutaka/how-to-make-realtime-os/tree/main/reset_handler)にreset handlerのみの実装を用意した。これをqemuで実行してhandlerまで処理がくるか確認をしてみる。
 
 ```
 $ make
@@ -86,9 +86,13 @@ arm-none-eabi-ld -o step001.elf -T nrf51x22xxac.ld step001.o
 arm-none-eabi-objcopy step001.elf step001.hex -O ihex
 ```
 
+qemuを実行
+
 ```
 $ qemu-system-arm -M microbit -device loader,file=step001.hex  -s -S
 ```
+
+別terminalからgdbを起動。reset_handler_defaultにbreakポイントを追加して処理を開始したところ、reset_handler_defaultに処理がきた。
 
 ```
 $ arm-none-eabi-gdb -nx
