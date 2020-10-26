@@ -76,3 +76,50 @@ SECTIONS
 ```
 
 ## 実験 (reset handler)
+
+
+
+```
+$ make
+arm-none-eabi-gcc -Wall -g -O0 -nostdlib -nostartfiles -ffreestanding  -mcpu=cortex-m0 -mthumb -c step001.c -o step001.o
+arm-none-eabi-ld -o step001.elf -T nrf51x22xxac.ld step001.o
+arm-none-eabi-objcopy step001.elf step001.hex -O ihex
+```
+
+```
+$ qemu-system-arm -M microbit -device loader,file=step001.hex  -s -S
+```
+
+```
+$ arm-none-eabi-gdb -nx
+GNU gdb (GNU Tools for Arm Embedded Processors 7-2018-q2-update) 8.1.0.20180315-git
+Copyright (C) 2018 Free Software Foundation, Inc.
+License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>
+This is free software: you are free to change and redistribute it.
+There is NO WARRANTY, to the extent permitted by law.  Type "show copying"
+and "show warranty" for details.
+This GDB was configured as "--host=x86_64-linux-gnu --target=arm-none-eabi".
+Type "show configuration" for configuration details.
+For bug reporting instructions, please see:
+<http://www.gnu.org/software/gdb/bugs/>.
+Find the GDB manual and other documentation resources online at:
+<http://www.gnu.org/software/gdb/documentation/>.
+For help, type "help".
+Type "apropos word" to search for commands related to "word".
+(gdb) file step001.elf 
+Reading symbols from step001.elf...done.
+(gdb) target remote localhost:1234
+Remote debugging using localhost:1234
+reset_handler_default () at step001.c:61
+61	{
+(gdb) b reset_handler_default 
+Breakpoint 1 at 0x46: file step001.c, line 63.
+(gdb) c
+Continuing.
+
+Breakpoint 1, reset_handler_default () at step001.c:63
+63	    const uint32_t *src = &_etext;
+(gdb) bt
+#0  reset_handler_default () at step001.c:63
+(gdb) 
+```
