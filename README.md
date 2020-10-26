@@ -75,3 +75,4 @@ SECTIONS
         *(.text .text.* .gnu.linkonce.t.*)```
 ```
 
+## 実験 (reset handler)
