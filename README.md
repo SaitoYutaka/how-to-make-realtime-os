@@ -27,7 +27,7 @@ warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 まずは、既にあるOSの実装を参考にする。
 参考にする予定のものは以下(他にも見つかったら随時更新する)
 
- * [RIOT](https://github.com/riot/riot)(すでにmicrobitに対応している。)
+ * [RIOT](https://github.com/RIOT-OS/RIOT)(すでにmicrobitに対応している。)
  * [nuttx](https://github.com/apache/incubator-nuttx)
 
  # リセットハンドラ
@@ -35,7 +35,7 @@ warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
  [microbit ver1.5](https://tech.microbit.org/hardware/1-5-revision/) は[nRF51822(ARM® Cortex™-M0)](https://www.nordicsemi.com/Products/Low-power-short-range-wireless/nRF51822)を使用している。
 
 
-[RIOT](https://github.com/riot/riot) を見ると以下のように*.cファイルと、リンカスクリプトでベクタテーブルの設定をしている。
+[RIOT](https://github.com/RIOT-OS/RIOT) を見ると以下のように*.cファイルと、リンカスクリプトでベクタテーブルの設定をしている。
 
 ```c
 // cpu/cortexm_common/include/vectors_cortexm.h
@@ -127,3 +127,13 @@ Breakpoint 1, reset_handler_default () at step001.c:63
 #0  reset_handler_default () at step001.c:63
 (gdb) 
 ```
+
+## linker script
+[linker script](https://sourceware.org/binutils/docs-2.35/ld/Scripts.html#Scripts)
+
+### KEEP
+http://blog.kmckk.com/archives/2601869.html
+
+### SORT
+???
+
